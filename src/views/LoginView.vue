@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <div class="">
       <p>아이디 또는 이메일</p>
       <input type="text" v-model="username" />
@@ -9,37 +9,33 @@
       <input type="password" v-model="userPassword" />
     </div>
     <div class="">
-      <p>이메일</p>
-      <input type="email" v-model="userEmail" />
-    </div>
-    <div class="">
-      <button @click="join">회원가입</button>
+      <button @click="login">로그인</button>
     </div>
   </div>
 </template>
 <script>
-const axios = require("axios");
+import axios from "axios";
 export default {
   data() {
     return {
       username: "",
       userPassword: "",
-      userEmail: "",
     };
   },
   methods: {
-    async join() {
+    async login() {
       await axios({
         method: "POST",
-        url: "/api/auth/local/register",
+        url: "/api/auth/local",
         data: {
-          username: this.username,
+          identifier: this.username,
           password: this.userPassword,
-          email: this.userEmail,
         },
       })
         .then((res) => {
           console.log(res);
+          this.$store.commit("setUserInformation", res.data);
+          alert("로그인 되었습니다.");
         })
         .catch((error) => {
           console.log(error);
@@ -49,3 +45,4 @@ export default {
   },
 };
 </script>
+<style lang=""></style>
