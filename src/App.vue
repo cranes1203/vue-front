@@ -6,7 +6,7 @@
       <router-link to="/about">회원가입</router-link> |
       <router-link to="/login">로그인</router-link> |
     </span>
-    <span v-else> <a @click="logout">로그아웃</a> | </span>
+    <span v-else> <a @click="logout">로그</a> | </span>
     <router-link to="/userInfor">유저 정보</router-link>
   </nav>
   <router-view />
